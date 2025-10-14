@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Color Circle with ON/OFF</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin-top: 50px;
+    }
+    #circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: lightgray;
+      margin: 20px auto;
+      border: 2px solid #333;
+      transition: background-color 0.3s;
+    }
+    .color-btn {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      color: white;
+      border-radius: 5px;
+    }
+    .red { background-color: red; }
+    .green { background-color: green; }
+    .blue { background-color: blue; }
+    .yellow { background-color: goldenrod; }
+    #toggle-btn {
+      margin-top: 30px;
+      padding: 10px 25px;
+      font-size: 18px;
+      background-color: #444;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Color the Circle</h1>
+  <div id="circle"></div>
+
+  <button class="color-btn red" onclick="changeColor('red')">Red</button>
+  <button class="color-btn green" onclick="changeColor('green')">Green</button>
+  <button class="color-btn blue" onclick="changeColor('blue')">Blue</button>
+  <button class="color-btn yellow" onclick="changeColor('goldenrod')">Yellow</button>
+
+  <br>
+  <button id="toggle-btn" onclick="togglePower()">Turn ON</button>
+
+  <script>
+    let isOn = false;
+
+    function togglePower() {
+      isOn = !isOn;
+      document.getElementById("toggle-btn").textContent = isOn ? "Turn OFF" : "Turn ON";
+      document.getElementById("circle").style.backgroundColor = isOn ? "white" : "lightgray";
+
+      const buttons = document.querySelectorAll(".color-btn");
+      buttons.forEach(btn => btn.disabled = !isOn);
+    }
+
+    function changeColor(color) {
+      if (isOn) {
+        document.getElementById("circle").style.backgroundColor = color;
+      }
+    }
+
+    // Initially disable color buttons
+    window.onload = () => {
+      document.querySelectorAll(".color-btn").forEach(btn => btn.disabled = true);
+    };
+  </script>
+
+</body>
+</html>
